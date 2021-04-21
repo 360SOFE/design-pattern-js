@@ -1,6 +1,24 @@
-# Initial page
+---
+description: 页面描述
+---
+
+# markdown参考
 
 段落
+
+**加粗**
+
+_斜体_
+
+~~删除线~~
+
+~~**混合使用**~~
+
+`代码 git pull`
+
+[链接](https://www.so.com)
+
+$$a = b$$ 
 
 ## 一级标题
 

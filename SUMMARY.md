@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [markdown参考](README.md)
 * [创建型模式](creational-design-patterns/README.md)
   * [工厂方法 Factory Method](creational-design-patterns/factory-method.md)
   * [抽象工厂模式 Abstract Factory](creational-design-patterns/abstract-factory.md)
