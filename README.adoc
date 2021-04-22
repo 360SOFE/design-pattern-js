@@ -1,51 +1,51 @@
----
-description: 页面描述
----
+= JavaScript 设计模式
 
-# markdown参考
+== 在线地址
 
-段落
+https://360sofe.github.io/design-pattern-js/
 
-**加粗**
+或
 
-_斜体_
+https://sofe360.gitbook.io/design-pattern-js/
 
-~~删除线~~
+== 编辑
 
-~~**混合使用**~~
+以编辑《抽象工厂模式》为例
+首先找到对应文件，文件命名为设计模式的英文名，中英对应关系可以在 link:SUMMARY.adoc[SUMMARY.adoc] 里找到
 
-`代码 git pull`
+*为了保持标题格式一致，请勿修改标题*
 
-[链接](https://www.so.com)
+=== 推荐使用 asciidoc 进行编写
 
-$$a = b$$ 
+Asciidoc 是一种比 markdown 更简洁、更强大的标记语言
 
-## 一级标题
 
-### 二级标题
+Asciidoc 语法快速参考：
 
-#### 三级标题
+https://asciidoctor.cn/docs/asciidoc-syntax-quick-reference
 
-* 列表项目1
-* 列表项目2
-* 列表项目3
+asciidoc VS markdown：
 
-1. 列表项目1
-2. 列表项目2
-3. 列表项目3
+https://docs.asciidoctor.org/asciidoc/latest/asciidoc-vs-markdown/
 
-* [ ] 任务列表
-* [ ] 任务列表2
+VSCode 插件：
 
-```text
-代码
-```
+https://marketplace.visualstudio.com/items?itemName=joaompinto.asciidoctor-vscode[asciidoctor-vscode]
 
-> 引用
+可视化编辑器 Asciidoc FX：
 
-![&#x56FE;&#x7247;&#x6807;&#x9898;](.gitbook/assets/jie-ping-20210421-xia-wu-4.51.31.png)
+https://www.asciidocfx.com/
 
-| 表格项目1 | 表格项目2 |
-| :--- | :--- |
-| 项目1内容 | 项目2内容 |
-| 项目1内容 | 项目2内容 |
+=== 仍然选择 markdown
+
+你需要做以下三件事：
+
+* 文件后缀名修改为.md
+* 将文件内容中的 `= Title` 修改为 `* Title`
+* 更新SUMMARY.adoc中对应文件的路径，同样的将后缀名修改为.md
+
+== 发布
+
+首先执行 `yarn serve` 启动静态服务器，访问 http://localhost:4000 并 *务必检查格式是否正确*
+
+确认格式无误后，将修改提交到 master 分支。几分钟后可以看到在线内容自动更新
