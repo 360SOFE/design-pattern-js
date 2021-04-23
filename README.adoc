@@ -4,10 +4,6 @@
 
 https://360sofe.github.io/design-pattern-js/
 
-或
-
-https://sofe360.gitbook.io/design-pattern-js/
-
 == 编辑
 
 以编辑《抽象工厂模式》为例
@@ -38,11 +34,13 @@ https://www.asciidocfx.com/
 
 === 仍然选择 markdown
 
-你需要做以下三件事：
+你需要花三分钟做以下三件事：
 
 * 文件后缀名修改为.md
-* 将文件内容中的 `= Title` 修改为 `* Title`
+* 将文件内容中的 `= [Title]` 修改为 `* [Title]`
 * 更新SUMMARY.adoc中对应文件的路径，同样的将后缀名修改为.md
+
+然后就可以使用 markdown 愉快地写文章了～
 
 == 发布
 
