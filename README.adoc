@@ -11,36 +11,19 @@ https://360sofe.github.io/design-pattern-js/
 
 *为了保持标题格式一致，请勿修改标题*
 
-=== 推荐使用 asciidoc 进行编写
+=== 使用 AsciiDoc 进行编写
 
-Asciidoc 是一种比 markdown 更简洁、更强大的标记语言
+本项目默认使用 Markdown 进行编写，如果你选择 Markdown 可以跳过这部分内容
 
+Gitbook 提供了 *有限的* Asciidoc 语法支持
 
-Asciidoc 语法快速参考：
+如果你选择使用 AsciiDoc 进行编写，需要花三分钟做以下三件事：
 
-https://asciidoctor.cn/docs/asciidoc-syntax-quick-reference
+* 文件后缀名修改为.adoc
+* 将文件内容中的 `* [Title]` 修改为 `= [Title]`
+* 更新 SUMMARY.md 中对应文件的路径，同样的将后缀名修改为 .adoc
 
-asciidoc VS markdown：
-
-https://docs.asciidoctor.org/asciidoc/latest/asciidoc-vs-markdown/
-
-VSCode 插件：
-
-https://marketplace.visualstudio.com/items?itemName=joaompinto.asciidoctor-vscode[asciidoctor-vscode]
-
-可视化编辑器 Asciidoc FX：
-
-https://www.asciidocfx.com/
-
-=== 仍然选择 markdown
-
-你需要花三分钟做以下三件事：
-
-* 文件后缀名修改为.md
-* 将文件内容中的 `= [Title]` 修改为 `* [Title]`
-* 更新SUMMARY.adoc中对应文件的路径，同样的将后缀名修改为.md
-
-然后就可以使用 markdown 愉快地写文章了～
+然后就可以使用 AsciiDoc 愉快地写文章了～
 
 == 发布
 
@@ -65,3 +48,25 @@ npm install graceful-fs@4.2.0 --save
 然后访问 http://localhost:4000 并 *务必检查格式是否正确*
 
 确认格式无误后，将修改提交到 master 分支。几分钟后可以看到在线内容自动更新
+
+== 附录
+
+== Asciidoc 相关参考
+
+Asciidoc 是一种比 Markdown 更简洁、更强大的标记语言。
+
+Asciidoc 语法快速参考：
+
+https://asciidoctor.cn/docs/asciidoc-syntax-quick-reference
+
+AsciiDoc VS Markdown：
+
+https://docs.asciidoctor.org/asciidoc/latest/asciidoc-vs-markdown/
+
+VSCode 插件：
+
+https://marketplace.visualstudio.com/items?itemName=joaompinto.asciidoctor-vscode[asciidoctor-vscode]
+
+可视化编辑器 AsciiDoc FX：
+
+https://www.asciidocfx.com/
