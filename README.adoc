@@ -44,6 +44,24 @@ https://www.asciidocfx.com/
 
 == 发布
 
-首先执行 `yarn serve` 启动静态服务器，访问 http://localhost:4000 并 *务必检查格式是否正确*
+首先执行 `yarn serve` 启动静态服务器
+
+[NOTE]
+====
+如果遇到报错：
+
+```
+TypeError: cb.apply is not a function
+```
+
+执行以下命令后再试一次
+
+```shell
+cd ./node_modules/npm/node_modules/
+npm install graceful-fs@4.2.0 --save
+```
+====
+
+然后访问 http://localhost:4000 并 *务必检查格式是否正确*
 
 确认格式无误后，将修改提交到 master 分支。几分钟后可以看到在线内容自动更新
