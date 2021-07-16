@@ -11,69 +11,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: install
-        run: yarn --frozen-lockfile
-        run: yarn gitbook install
-      - name: build
-        run: yarn gitbook build
-
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJSON(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJSON(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJSON(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJSON(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
-      # - run: cd _book
-      # - run: git init
-      # - run: git remote add origin https://github.com/360SOFE/design-pattern-js.git
-      # - run: git add .
-      # - run: git commit -m "Updated By Travis-CI With Build $TRAVIS_BUILD_NUMBER For Github Pages"
-      # - run: git push --force --quiet "https://${TOKEN}@$github.com/360SOFE/design-pattern-js.git" master:gh-pages
-
-
-# install:
-#   - npm install -g gitbook-cli
-#   - gitbook install
-
-# script:
-#   - gitbook build
-
-# after_script:
-#   - cd _book
-#   - git init
-#   - git remote add origin https://${REF}
-#   - git add .
-#   - git commit -m "Updated By Travis-CI With Build $TRAVIS_BUILD_NUMBER For Github Pages"
-#   - git push --force --quiet "https://${TOKEN}@${REF}" master:gh-pages
-
-# env:
-#   global:
-#     - REF=github.com/360SOFE/design-pattern-js.git # 设置 github 地址
+        - name: Checkout action
+          uses: actions/checkout@v2
+        - name: Gitbook Action           # https://github.com/ZanderZhao/gitbook-action/releases
+          uses: ZanderZhao/gitbook-action@v1.2.4  # -> or ZanderZhao/gitbook-action@master.  If not use master click above, use latest please 
+          with:                                   #    or fork this repo and use YourName/gitbook-action@master
+            token: ${{ secrets.PERSONAL_TOKEN }}  # -> remember add this in settings/secrets as following
