@@ -100,27 +100,27 @@ target.fc(); // 服务：c
 ```javascript
 // 客户端接口
 interface Target {
-    f1(): void;
-    f2(): void;
-    fc(): void;
+    f1():void;
+    f2():void;
+    fc():void;
 }
 
 // service 服务
 class Adaptee {
     constructor() {}
-    public fa():void {
+    public fa(): void {
         console.log("服务：a");
     }
-    public fb():void {
+    public fb(): void {
         console.log("服务：b");
     }
-    public fc():void {
+    public fc(): void {
         console.log("服务：c");
     }
 }
 
 // 适配器
-class Adapter extends Adaptee implements Target {
+class Adapter extends Adaptee implements Target  {
     constructor() {
         super();
     }
@@ -141,3 +141,291 @@ target.fc(); // 服务：c
 
 ## 适配器模式的应用场景
 
+### 应用场景之一：封装有缺陷的接口设计
+
+
+
+```javascript
+// 客户端接口
+class Target {
+    public request(): string {
+        return '默认的客户端方法request';
+    }
+}
+
+// service 服务
+class Adaptee {
+    public specificRequest(): string {
+        return '.eetpadA eht fo roivaheb laicepS';
+    }
+}
+
+// 适配器
+class Adapter extends Target {
+    private adaptee: Adaptee;
+    constructor(adaptee: Adaptee) {
+        super();
+        this.adaptee = adaptee;
+    }
+    // 复写request方法
+    public request(): string {
+        const result = this.adaptee.specificRequest().split("").reverse().join("");
+        return `复写的客户端request方法. Adapter: (TRANSLATED) ${result}`;
+    }
+}
+
+// 客户端
+function clientCode(target: Target) {
+    console.log(target.request());
+}
+
+console.log("客户端：可以很好地使用Target对象：");
+const target = new Target();
+clientCode(target); // 默认的客户端方法request方法
+
+const adaptee = new Adaptee();
+console.log("客户端：Adaptee类有一个奇怪的接口");
+console.log(`Adaptee: ${adaptee.specificRequest()}`);
+
+const adapter = new Adapter(adaptee);
+clientCode(adapter); // 复写的客户端request方法. Adapter: (TRANSLATED) Special behavior of the Adaptee.
+```
+
+### 应用场景之二：统一多个类的接口设计
+
+有一个系统要对用户输入的文本内容做敏感词过滤，为提高过滤的覆盖率引入了多款第三方敏感词过滤系统，依次对用户输入的内容进行过滤。但是每个过滤系统提供的接口都不同，这就意味着没法复用一套逻辑来调用各个系统。这时就可以使用适配器模式。
+
+```javascript
+// A敏感词过滤系统提供的接口
+class ASensitiveWordsFilter {
+  public filterSexyWords(text: string): string {
+    return `A接口过滤性敏感词${text}--`;
+  }
+  public filterPoliticalWords(text: string): string {
+    return `A接口过滤政治敏感词${text}--`;
+  }
+}
+
+// B敏感词过滤系统提供的接口
+class BSensitiveWordsFilter {
+  public filter(text: string): string {
+    return `B接口过滤敏感词${text}--`;
+  }
+}
+
+// C敏感词过滤系统提供的接口
+class CSensitiveWordsFilter {
+  public filter(text: string, mask: string): string {
+    return `C接口过滤敏感词${text}${mask}--`;
+  }
+}
+
+```
+未使用适配器模式时：
+
+```javascript
+class RiskManagement {
+    private aFilter: ASensitiveWordsFilter = new ASensitiveWordsFilter();
+    private bFilter: BSensitiveWordsFilter = new BSensitiveWordsFilter();
+    private cFilter: CSensitiveWordsFilter = new CSensitiveWordsFilter();
+
+    public filterSensitiveWords(text: string): string {
+        let maskedText = this.aFilter.filterSexyWords(text);
+            maskedText = this.aFilter.filterPoliticalWords(maskedText);
+            maskedText = this.bFilter.filter(maskedText);
+            maskedText = this.cFilter.filter(maskedText, "***");
+        return maskedText;
+    }
+}
+const riskmanagement = new RiskManagement();
+const filterResult = riskmanagement.filterSensitiveWords("test");
+console.log(filterResult); // C接口过滤敏感词B接口过滤敏感词A接口过滤政治敏感词A接口过滤性敏感词test------***--
+```
+使用适配器模式后：
+
+```javascript
+// 客户端接口
+interface ISensitiveWordsFilter {
+  filter(text: string, mask?: string): string;
+}
+// A接口适配器
+class ASensitiveWordsFilterAdaptor implements ISensitiveWordsFilter {
+  private aFilter: ASensitiveWordsFilter = new ASensitiveWordsFilter();
+  public filter(text: string): string {
+    let maskedText: string = this.aFilter.filterSexyWords(text);
+        maskedText = this.aFilter.filterPoliticalWords(maskedText);
+    return maskedText;
+  }
+}
+// B接口适配器
+class BSensitiveWordsFilterAdaptor implements ISensitiveWordsFilter {
+  private bFilter: BSensitiveWordsFilter = new BSensitiveWordsFilter();
+  public filter(text: string): string {
+    let maskedText: string = this.bFilter.filter(text);
+    return maskedText;
+  }
+}
+// C接口适配器
+class CSensitiveWordsFilterAdaptor implements ISensitiveWordsFilter {
+  private cFilter: CSensitiveWordsFilter = new CSensitiveWordsFilter();
+  public filter(text: string, mask: string) {
+    let maskedText: string = this.cFilter.filter(text, mask);
+    return maskedText;
+  }
+}
+
+class RiskManagement {
+  private filters: ISensitiveWordsFilter[] = new Array();
+
+  public addSensitiveWordsFilter(filter: ISensitiveWordsFilter): void {
+    this.filters.push(filter);
+  }
+
+  public filterSensitiveWords(text: string, mask: string) {
+    let maskedText: string = text;
+    this.filters.forEach((filter) => {
+      console.log(`before:${maskedText}`);
+      maskedText = filter.filter(maskedText, mask);
+      console.log(`after:${maskedText}`);
+    });
+    return maskedText;
+  }
+}
+
+const riskmanagement = new RiskManagement();
+
+riskmanagement.addSensitiveWordsFilter(new ASensitiveWordsFilterAdaptor());
+riskmanagement.addSensitiveWordsFilter(new BSensitiveWordsFilterAdaptor());
+riskmanagement.addSensitiveWordsFilter(new CSensitiveWordsFilterAdaptor());
+const filterResult = riskmanagement.filterSensitiveWords("test", "***");
+
+console.log(filterResult); // C接口过滤敏感词B接口过滤敏感词A接口过滤政治敏感词A接口过滤性敏感词test------***--
+```
+
+### 应用场景之三：替换依赖的外部系统
+
+有一个日志系统将应用程序的所有log信息保存成本地文件，并在消息服务器中发送log信息。应用增长后日志需要保存到云服务器，不需要保存在磁盘。为了避免重复，可以考虑使用适配器模式。
+
+```javascript
+// 客户端接口
+interface Logger {
+  info(message: string): Promise<void>;
+}
+interface CloundLogger {
+  sendToServer(message: string, type: string): Promise<void>;
+}
+
+class FileLogger implements Logger {
+  public async info(message: string): Promise<void> {
+    console.log(message);
+    console.log("This Message was saved with FileLogger");
+  }
+}
+
+class AliLogger implements CloundLogger {
+  public async sendToServer(message: string, type: string): Promise<void> {
+    console.log(message, type);
+    console.log("This Message was saved with AliLogger");
+  }
+}
+
+class CloundLoggerAdapter implements Logger {
+  protected cloundLogger: CloundLogger;
+
+  constructor(cloundLogger: CloundLogger) {
+    this.cloundLogger = cloundLogger;
+  }
+  public async info(message: string): Promise<void> {
+    await this.cloundLogger.sendToServer(message, "info");
+  }
+}
+
+class NotificationService {
+  protected logger: Logger;
+  constructor(logger: Logger) {
+    this.logger = logger;
+  }
+  public async send(message: String): Promise<void> {
+    await this.logger.info(`Notification sended: ${message}`);
+  }
+}
+
+// const loggerRunder = async () => {
+//   const fileLogger = new FileLogger();
+//   const notificationService = new NotificationService(fileLogger);
+//   notificationService.send("Hello Semlinker, To File");
+// };
+
+const loggerRunder = async () => {
+  const aliLogger = new AliLogger();
+  const cloundLoggerAdaptor = new CloundLoggerAdapter(aliLogger);
+  const notificationService = new NotificationService(cloundLoggerAdaptor);
+  notificationService.send("Hello Kakuqo, To Cloud");
+};
+loggerRunder(); 
+// "Notification sended: Hello Kakuqo, To Cloud",  "info"
+// "This Message was saved with AliLogge"
+
+```
+
+### 应用场景之四：兼容老版本的接口
+
+在做版本升级时，对于一些要废弃的接口，我们不直接将其删除，而是暂时保留，并且标注为`deprecated`，并将内部实现逻辑委托为新接口实现。这样做的好处是，让使用它的项目有个过渡期，而不是强制进行代码修改，这也可以粗略的看作适配器模式的一个应用场景。
+
+```javascript
+// JDK1.0 中包含一个遍历集合容器的类 Enumeration。JDK2.0 对这个类进行了重构，将它改名为 Iterator 类
+
+public class Collections {
+  public static Emueration emumeration(final Collection c) {
+    return new Enumeration() {
+      Iterator i = c.iterator();
+      
+      public boolean hasMoreElments() {
+        return i.hashNext();
+      }
+      
+      public Object nextElement() {
+        return i.next():
+      }
+    }
+  }
+}
+```
+### 应用场景之五：适配不同格式的数据
+
+```javascript
+const googleMap = {
+  show: function () {
+    console.log("开始渲染谷歌地图");
+  }
+};
+const baiduMap = {
+  show: function () {
+    console.log("开始渲染百度地图");
+  }
+};
+const renderMap = function (map) {
+  if (map.show instanceof Function) {
+    map.show();
+  }
+};
+
+renderMap(googleMap); // 输出 开始渲染谷歌地图
+renderMap(baiduMap); // 输出 开始渲染百度地图
+
+const gaodeMap = {
+  display: function () {
+    console.log("开始渲染高德地图");
+  }
+};
+
+const gaodeMapAdapter = {
+  show: function () {
+    return gaodeMap.display();
+  }
+};
+renderMap(googleMap); // 输出 开始渲染谷歌地图
+renderMap(baiduMap); // 输出 开始渲染百度地图
+renderMap(gaodeMapAdapter); // 输出 开始渲染高德地图
+
+```
