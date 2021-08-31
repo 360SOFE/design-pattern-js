@@ -599,27 +599,27 @@ target.fc(); <span class="hljs-comment">// &#x670D;&#x52A1;&#xFF1A;c</span>
 <p>&#x7C7B;&#x9002;&#x914D;&#x5668;&#x4E0D;&#x9700;&#x8981;&#x5C01;&#x88C5;&#x4EFB;&#x4F55;&#x5BF9;&#x8C61;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x540C;&#x65F6;&#x7EE7;&#x627F;&#x4E86;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x7684;&#x884C;&#x4E3A;&#x3002;&#x9002;&#x914D;&#x7684;&#x529F;&#x80FD;&#x5728;&#x91CD;&#x5199;&#x7684;&#x65B9;&#x6CD5;&#x4E2D;&#x5B8C;&#x6210;&#x3002;&#x6700;&#x540E;&#x751F;&#x6210;&#x7684;&#x9002;&#x914D;&#x5668;&#x53EF;&#x66FF;&#x4EE3;&#x5DF2;&#x6709;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x7C7B;&#x8FDB;&#x884C;&#x4F7F;&#x7528;&#x3002;</p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// &#x5BA2;&#x6237;&#x7AEF;&#x63A5;&#x53E3;</span>
 interface Target {
-    f1(): <span class="hljs-keyword">void</span>;
-    f2(): <span class="hljs-keyword">void</span>;
-    fc(): <span class="hljs-keyword">void</span>;
+    f1():<span class="hljs-keyword">void</span>;
+    f2():<span class="hljs-keyword">void</span>;
+    fc():<span class="hljs-keyword">void</span>;
 }
 
 <span class="hljs-comment">// service &#x670D;&#x52A1;</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adaptee</span> </span>{
     <span class="hljs-keyword">constructor</span>() {}
-    public fa():<span class="hljs-keyword">void</span> {
+    public fa(): <span class="hljs-keyword">void</span> {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&#x670D;&#x52A1;&#xFF1A;a&quot;</span>);
     }
-    public fb():<span class="hljs-keyword">void</span> {
+    public fb(): <span class="hljs-keyword">void</span> {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&#x670D;&#x52A1;&#xFF1A;b&quot;</span>);
     }
-    public fc():<span class="hljs-keyword">void</span> {
+    public fc(): <span class="hljs-keyword">void</span> {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&#x670D;&#x52A1;&#xFF1A;c&quot;</span>);
     }
 }
 
 <span class="hljs-comment">// &#x9002;&#x914D;&#x5668;</span>
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Adaptee</span> <span class="hljs-title">implements</span> <span class="hljs-title">Target</span> </span>{
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Adaptee</span> <span class="hljs-title">implements</span> <span class="hljs-title">Target</span>  </span>{
     <span class="hljs-keyword">constructor</span>() {
         <span class="hljs-keyword">super</span>();
     }
@@ -638,6 +638,269 @@ target.f2(); <span class="hljs-comment">// &#x7C7B;&#x9002;&#x914D;&#x5668;:222<
 target.fc(); <span class="hljs-comment">// &#x670D;&#x52A1;&#xFF1A;c</span>
 </code></pre>
 <h2 id="&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;">&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;</h2>
+<h3 id="&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x4E00;&#xFF1A;&#x5C01;&#x88C5;&#x6709;&#x7F3A;&#x9677;&#x7684;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;">&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x4E00;&#xFF1A;&#x5C01;&#x88C5;&#x6709;&#x7F3A;&#x9677;&#x7684;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;</h3>
+<pre><code class="lang-javascript"><span class="hljs-comment">// &#x5BA2;&#x6237;&#x7AEF;&#x63A5;&#x53E3;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Target</span> </span>{
+    public request(): string {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;&#x9ED8;&#x8BA4;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x65B9;&#x6CD5;request&apos;</span>;
+    }
+}
+
+<span class="hljs-comment">// service &#x670D;&#x52A1;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adaptee</span> </span>{
+    public specificRequest(): string {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;.eetpadA eht fo roivaheb laicepS&apos;</span>;
+    }
+}
+
+<span class="hljs-comment">// &#x9002;&#x914D;&#x5668;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Target</span> </span>{
+    private adaptee: Adaptee;
+    <span class="hljs-keyword">constructor</span>(adaptee: Adaptee) {
+        <span class="hljs-keyword">super</span>();
+        <span class="hljs-keyword">this</span>.adaptee = adaptee;
+    }
+    <span class="hljs-comment">// &#x590D;&#x5199;request&#x65B9;&#x6CD5;</span>
+    public request(): string {
+        <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">this</span>.adaptee.specificRequest().split(<span class="hljs-string">&quot;&quot;</span>).reverse().join(<span class="hljs-string">&quot;&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-string">`&#x590D;&#x5199;&#x7684;&#x5BA2;&#x6237;&#x7AEF;request&#x65B9;&#x6CD5;. Adapter: (TRANSLATED) <span class="hljs-subst">${result}</span>`</span>;
+    }
+}
+
+<span class="hljs-comment">// &#x5BA2;&#x6237;&#x7AEF;</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">clientCode</span>(<span class="hljs-params">target: Target</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(target.request());
+}
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&#x5BA2;&#x6237;&#x7AEF;&#xFF1A;&#x53EF;&#x4EE5;&#x5F88;&#x597D;&#x5730;&#x4F7F;&#x7528;Target&#x5BF9;&#x8C61;&#xFF1A;&quot;</span>);
+<span class="hljs-keyword">const</span> target = <span class="hljs-keyword">new</span> Target();
+clientCode(target); <span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x65B9;&#x6CD5;request&#x65B9;&#x6CD5;</span>
+
+<span class="hljs-keyword">const</span> adaptee = <span class="hljs-keyword">new</span> Adaptee();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&#x5BA2;&#x6237;&#x7AEF;&#xFF1A;Adaptee&#x7C7B;&#x6709;&#x4E00;&#x4E2A;&#x5947;&#x602A;&#x7684;&#x63A5;&#x53E3;&quot;</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Adaptee: <span class="hljs-subst">${adaptee.specificRequest()}</span>`</span>);
+
+<span class="hljs-keyword">const</span> adapter = <span class="hljs-keyword">new</span> Adapter(adaptee);
+clientCode(adapter); <span class="hljs-comment">// &#x590D;&#x5199;&#x7684;&#x5BA2;&#x6237;&#x7AEF;request&#x65B9;&#x6CD5;. Adapter: (TRANSLATED) Special behavior of the Adaptee.</span>
+</code></pre>
+<h3 id="&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x4E8C;&#xFF1A;&#x7EDF;&#x4E00;&#x591A;&#x4E2A;&#x7C7B;&#x7684;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;">&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x4E8C;&#xFF1A;&#x7EDF;&#x4E00;&#x591A;&#x4E2A;&#x7C7B;&#x7684;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;</h3>
+<p>&#x6709;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x8981;&#x5BF9;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x6587;&#x672C;&#x5185;&#x5BB9;&#x505A;&#x654F;&#x611F;&#x8BCD;&#x8FC7;&#x6EE4;&#xFF0C;&#x4E3A;&#x63D0;&#x9AD8;&#x8FC7;&#x6EE4;&#x7684;&#x8986;&#x76D6;&#x7387;&#x5F15;&#x5165;&#x4E86;&#x591A;&#x6B3E;&#x7B2C;&#x4E09;&#x65B9;&#x654F;&#x611F;&#x8BCD;&#x8FC7;&#x6EE4;&#x7CFB;&#x7EDF;&#xFF0C;&#x4F9D;&#x6B21;&#x5BF9;&#x7528;&#x6237;&#x8F93;&#x5165;&#x7684;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;&#x3002;&#x4F46;&#x662F;&#x6BCF;&#x4E2A;&#x8FC7;&#x6EE4;&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x7684;&#x63A5;&#x53E3;&#x90FD;&#x4E0D;&#x540C;&#xFF0C;&#x8FD9;&#x5C31;&#x610F;&#x5473;&#x7740;&#x6CA1;&#x6CD5;&#x590D;&#x7528;&#x4E00;&#x5957;&#x903B;&#x8F91;&#x6765;&#x8C03;&#x7528;&#x5404;&#x4E2A;&#x7CFB;&#x7EDF;&#x3002;&#x8FD9;&#x65F6;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// A&#x654F;&#x611F;&#x8BCD;&#x8FC7;&#x6EE4;&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x7684;&#x63A5;&#x53E3;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ASensitiveWordsFilter</span> </span>{
+  public filterSexyWords(text: string): string {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`A&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x6027;&#x654F;&#x611F;&#x8BCD;<span class="hljs-subst">${text}</span>--`</span>;
+  }
+  public filterPoliticalWords(text: string): string {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`A&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x653F;&#x6CBB;&#x654F;&#x611F;&#x8BCD;<span class="hljs-subst">${text}</span>--`</span>;
+  }
+}
+
+<span class="hljs-comment">// B&#x654F;&#x611F;&#x8BCD;&#x8FC7;&#x6EE4;&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x7684;&#x63A5;&#x53E3;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BSensitiveWordsFilter</span> </span>{
+  public filter(text: string): string {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`B&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x654F;&#x611F;&#x8BCD;<span class="hljs-subst">${text}</span>--`</span>;
+  }
+}
+
+<span class="hljs-comment">// C&#x654F;&#x611F;&#x8BCD;&#x8FC7;&#x6EE4;&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x7684;&#x63A5;&#x53E3;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CSensitiveWordsFilter</span> </span>{
+  public filter(text: string, mask: string): string {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`C&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x654F;&#x611F;&#x8BCD;<span class="hljs-subst">${text}</span><span class="hljs-subst">${mask}</span>--`</span>;
+  }
+}
+</code></pre>
+<p>&#x672A;&#x4F7F;&#x7528;&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x65F6;&#xFF1A;</p>
+<pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RiskManagement</span> </span>{
+    private aFilter: ASensitiveWordsFilter = <span class="hljs-keyword">new</span> ASensitiveWordsFilter();
+    private bFilter: BSensitiveWordsFilter = <span class="hljs-keyword">new</span> BSensitiveWordsFilter();
+    private cFilter: CSensitiveWordsFilter = <span class="hljs-keyword">new</span> CSensitiveWordsFilter();
+
+    public filterSensitiveWords(text: string): string {
+        <span class="hljs-keyword">let</span> maskedText = <span class="hljs-keyword">this</span>.aFilter.filterSexyWords(text);
+            maskedText = <span class="hljs-keyword">this</span>.aFilter.filterPoliticalWords(maskedText);
+            maskedText = <span class="hljs-keyword">this</span>.bFilter.filter(maskedText);
+            maskedText = <span class="hljs-keyword">this</span>.cFilter.filter(maskedText, <span class="hljs-string">&quot;***&quot;</span>);
+        <span class="hljs-keyword">return</span> maskedText;
+    }
+}
+<span class="hljs-keyword">const</span> riskmanagement = <span class="hljs-keyword">new</span> RiskManagement();
+<span class="hljs-keyword">const</span> filterResult = riskmanagement.filterSensitiveWords(<span class="hljs-string">&quot;test&quot;</span>);
+<span class="hljs-built_in">console</span>.log(filterResult); <span class="hljs-comment">// C&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x654F;&#x611F;&#x8BCD;B&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x654F;&#x611F;&#x8BCD;A&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x653F;&#x6CBB;&#x654F;&#x611F;&#x8BCD;A&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x6027;&#x654F;&#x611F;&#x8BCD;test------***--</span>
+</code></pre>
+<p>&#x4F7F;&#x7528;&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x540E;&#xFF1A;</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// &#x5BA2;&#x6237;&#x7AEF;&#x63A5;&#x53E3;</span>
+interface ISensitiveWordsFilter {
+  filter(text: string, mask?: string): string;
+}
+<span class="hljs-comment">// A&#x63A5;&#x53E3;&#x9002;&#x914D;&#x5668;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ASensitiveWordsFilterAdaptor</span> <span class="hljs-title">implements</span> <span class="hljs-title">ISensitiveWordsFilter</span> </span>{
+  private aFilter: ASensitiveWordsFilter = <span class="hljs-keyword">new</span> ASensitiveWordsFilter();
+  public filter(text: string): string {
+    <span class="hljs-keyword">let</span> maskedText: string = <span class="hljs-keyword">this</span>.aFilter.filterSexyWords(text);
+        maskedText = <span class="hljs-keyword">this</span>.aFilter.filterPoliticalWords(maskedText);
+    <span class="hljs-keyword">return</span> maskedText;
+  }
+}
+<span class="hljs-comment">// B&#x63A5;&#x53E3;&#x9002;&#x914D;&#x5668;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BSensitiveWordsFilterAdaptor</span> <span class="hljs-title">implements</span> <span class="hljs-title">ISensitiveWordsFilter</span> </span>{
+  private bFilter: BSensitiveWordsFilter = <span class="hljs-keyword">new</span> BSensitiveWordsFilter();
+  public filter(text: string): string {
+    <span class="hljs-keyword">let</span> maskedText: string = <span class="hljs-keyword">this</span>.bFilter.filter(text);
+    <span class="hljs-keyword">return</span> maskedText;
+  }
+}
+<span class="hljs-comment">// C&#x63A5;&#x53E3;&#x9002;&#x914D;&#x5668;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CSensitiveWordsFilterAdaptor</span> <span class="hljs-title">implements</span> <span class="hljs-title">ISensitiveWordsFilter</span> </span>{
+  private cFilter: CSensitiveWordsFilter = <span class="hljs-keyword">new</span> CSensitiveWordsFilter();
+  public filter(text: string, mask: string) {
+    <span class="hljs-keyword">let</span> maskedText: string = <span class="hljs-keyword">this</span>.cFilter.filter(text, mask);
+    <span class="hljs-keyword">return</span> maskedText;
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RiskManagement</span> </span>{
+  private filters: ISensitiveWordsFilter[] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>();
+
+  public addSensitiveWordsFilter(filter: ISensitiveWordsFilter): <span class="hljs-keyword">void</span> {
+    <span class="hljs-keyword">this</span>.filters.push(filter);
+  }
+
+  public filterSensitiveWords(text: string, mask: string) {
+    <span class="hljs-keyword">let</span> maskedText: string = text;
+    <span class="hljs-keyword">this</span>.filters.forEach((filter) =&gt; {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`before:<span class="hljs-subst">${maskedText}</span>`</span>);
+      maskedText = filter.filter(maskedText, mask);
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`after:<span class="hljs-subst">${maskedText}</span>`</span>);
+    });
+    <span class="hljs-keyword">return</span> maskedText;
+  }
+}
+
+<span class="hljs-keyword">const</span> riskmanagement = <span class="hljs-keyword">new</span> RiskManagement();
+
+riskmanagement.addSensitiveWordsFilter(<span class="hljs-keyword">new</span> ASensitiveWordsFilterAdaptor());
+riskmanagement.addSensitiveWordsFilter(<span class="hljs-keyword">new</span> BSensitiveWordsFilterAdaptor());
+riskmanagement.addSensitiveWordsFilter(<span class="hljs-keyword">new</span> CSensitiveWordsFilterAdaptor());
+<span class="hljs-keyword">const</span> filterResult = riskmanagement.filterSensitiveWords(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;***&quot;</span>);
+
+<span class="hljs-built_in">console</span>.log(filterResult); <span class="hljs-comment">// C&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x654F;&#x611F;&#x8BCD;B&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x654F;&#x611F;&#x8BCD;A&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x653F;&#x6CBB;&#x654F;&#x611F;&#x8BCD;A&#x63A5;&#x53E3;&#x8FC7;&#x6EE4;&#x6027;&#x654F;&#x611F;&#x8BCD;test------***--</span>
+</code></pre>
+<h3 id="&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x4E09;&#xFF1A;&#x66FF;&#x6362;&#x4F9D;&#x8D56;&#x7684;&#x5916;&#x90E8;&#x7CFB;&#x7EDF;">&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x4E09;&#xFF1A;&#x66FF;&#x6362;&#x4F9D;&#x8D56;&#x7684;&#x5916;&#x90E8;&#x7CFB;&#x7EDF;</h3>
+<p>&#x6709;&#x4E00;&#x4E2A;&#x65E5;&#x5FD7;&#x7CFB;&#x7EDF;&#x5C06;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x6240;&#x6709;log&#x4FE1;&#x606F;&#x4FDD;&#x5B58;&#x6210;&#x672C;&#x5730;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x5728;&#x6D88;&#x606F;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x53D1;&#x9001;log&#x4FE1;&#x606F;&#x3002;&#x5E94;&#x7528;&#x589E;&#x957F;&#x540E;&#x65E5;&#x5FD7;&#x9700;&#x8981;&#x4FDD;&#x5B58;&#x5230;&#x4E91;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4FDD;&#x5B58;&#x5728;&#x78C1;&#x76D8;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x91CD;&#x590D;&#xFF0C;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x4F7F;&#x7528;&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// &#x5BA2;&#x6237;&#x7AEF;&#x63A5;&#x53E3;</span>
+interface Logger {
+  info(message: string): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt;;
+}
+interface CloundLogger {
+  sendToServer(message: string, type: string): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt;;
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileLogger</span> <span class="hljs-title">implements</span> <span class="hljs-title">Logger</span> </span>{
+  public <span class="hljs-keyword">async</span> info(message: string): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt; {
+    <span class="hljs-built_in">console</span>.log(message);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;This Message was saved with FileLogger&quot;</span>);
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AliLogger</span> <span class="hljs-title">implements</span> <span class="hljs-title">CloundLogger</span> </span>{
+  public <span class="hljs-keyword">async</span> sendToServer(message: string, type: string): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt; {
+    <span class="hljs-built_in">console</span>.log(message, type);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;This Message was saved with AliLogger&quot;</span>);
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CloundLoggerAdapter</span> <span class="hljs-title">implements</span> <span class="hljs-title">Logger</span> </span>{
+  protected cloundLogger: CloundLogger;
+
+  <span class="hljs-keyword">constructor</span>(cloundLogger: CloundLogger) {
+    <span class="hljs-keyword">this</span>.cloundLogger = cloundLogger;
+  }
+  public <span class="hljs-keyword">async</span> info(message: string): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt; {
+    <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.cloundLogger.sendToServer(message, <span class="hljs-string">&quot;info&quot;</span>);
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotificationService</span> </span>{
+  protected logger: Logger;
+  <span class="hljs-keyword">constructor</span>(logger: Logger) {
+    <span class="hljs-keyword">this</span>.logger = logger;
+  }
+  public <span class="hljs-keyword">async</span> send(message: <span class="hljs-built_in">String</span>): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt; {
+    <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.logger.info(<span class="hljs-string">`Notification sended: <span class="hljs-subst">${message}</span>`</span>);
+  }
+}
+
+<span class="hljs-comment">// const loggerRunder = async () =&gt; {</span>
+<span class="hljs-comment">//   const fileLogger = new FileLogger();</span>
+<span class="hljs-comment">//   const notificationService = new NotificationService(fileLogger);</span>
+<span class="hljs-comment">//   notificationService.send(&quot;Hello Semlinker, To File&quot;);</span>
+<span class="hljs-comment">// };</span>
+
+<span class="hljs-keyword">const</span> loggerRunder = <span class="hljs-keyword">async</span> () =&gt; {
+  <span class="hljs-keyword">const</span> aliLogger = <span class="hljs-keyword">new</span> AliLogger();
+  <span class="hljs-keyword">const</span> cloundLoggerAdaptor = <span class="hljs-keyword">new</span> CloundLoggerAdapter(aliLogger);
+  <span class="hljs-keyword">const</span> notificationService = <span class="hljs-keyword">new</span> NotificationService(cloundLoggerAdaptor);
+  notificationService.send(<span class="hljs-string">&quot;Hello Kakuqo, To Cloud&quot;</span>);
+};
+loggerRunder(); 
+<span class="hljs-comment">// &quot;Notification sended: Hello Kakuqo, To Cloud&quot;,  &quot;info&quot;</span>
+<span class="hljs-comment">// &quot;This Message was saved with AliLogge&quot;</span>
+</code></pre>
+<h3 id="&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x56DB;&#xFF1A;&#x517C;&#x5BB9;&#x8001;&#x7248;&#x672C;&#x7684;&#x63A5;&#x53E3;">&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x56DB;&#xFF1A;&#x517C;&#x5BB9;&#x8001;&#x7248;&#x672C;&#x7684;&#x63A5;&#x53E3;</h3>
+<p>&#x5728;&#x505A;&#x7248;&#x672C;&#x5347;&#x7EA7;&#x65F6;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x8981;&#x5E9F;&#x5F03;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x76F4;&#x63A5;&#x5C06;&#x5176;&#x5220;&#x9664;&#xFF0C;&#x800C;&#x662F;&#x6682;&#x65F6;&#x4FDD;&#x7559;&#xFF0C;&#x5E76;&#x4E14;&#x6807;&#x6CE8;&#x4E3A;<code>deprecated</code>&#xFF0C;&#x5E76;&#x5C06;&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x903B;&#x8F91;&#x59D4;&#x6258;&#x4E3A;&#x65B0;&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x3002;&#x8FD9;&#x6837;&#x505A;&#x7684;&#x597D;&#x5904;&#x662F;&#xFF0C;&#x8BA9;&#x4F7F;&#x7528;&#x5B83;&#x7684;&#x9879;&#x76EE;&#x6709;&#x4E2A;&#x8FC7;&#x6E21;&#x671F;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5F3A;&#x5236;&#x8FDB;&#x884C;&#x4EE3;&#x7801;&#x4FEE;&#x6539;&#xFF0C;&#x8FD9;&#x4E5F;&#x53EF;&#x4EE5;&#x7C97;&#x7565;&#x7684;&#x770B;&#x4F5C;&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x7684;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x573A;&#x666F;&#x3002;</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// JDK1.0 &#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x904D;&#x5386;&#x96C6;&#x5408;&#x5BB9;&#x5668;&#x7684;&#x7C7B; Enumeration&#x3002;JDK2.0 &#x5BF9;&#x8FD9;&#x4E2A;&#x7C7B;&#x8FDB;&#x884C;&#x4E86;&#x91CD;&#x6784;&#xFF0C;&#x5C06;&#x5B83;&#x6539;&#x540D;&#x4E3A; Iterator &#x7C7B;</span>
+
+public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Collections</span> </span>{
+  public <span class="hljs-keyword">static</span> Emueration emumeration(final Collection c) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Enumeration() {
+      Iterator i = c.iterator();
+
+      public boolean hasMoreElments() {
+        <span class="hljs-keyword">return</span> i.hashNext();
+      }
+
+      public <span class="hljs-built_in">Object</span> nextElement() {
+        <span class="hljs-keyword">return</span> i.next():
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x4E94;&#xFF1A;&#x9002;&#x914D;&#x4E0D;&#x540C;&#x683C;&#x5F0F;&#x7684;&#x6570;&#x636E;">&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E4B;&#x4E94;&#xFF1A;&#x9002;&#x914D;&#x4E0D;&#x540C;&#x683C;&#x5F0F;&#x7684;&#x6570;&#x636E;</h3>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> googleMap = {
+  show: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&#x5F00;&#x59CB;&#x6E32;&#x67D3;&#x8C37;&#x6B4C;&#x5730;&#x56FE;&quot;</span>);
+  }
+};
+<span class="hljs-keyword">const</span> baiduMap = {
+  show: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&#x5F00;&#x59CB;&#x6E32;&#x67D3;&#x767E;&#x5EA6;&#x5730;&#x56FE;&quot;</span>);
+  }
+};
+<span class="hljs-keyword">const</span> renderMap = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">map</span>) </span>{
+  <span class="hljs-keyword">if</span> (map.show <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Function</span>) {
+    map.show();
+  }
+};
+
+renderMap(googleMap); <span class="hljs-comment">// &#x8F93;&#x51FA; &#x5F00;&#x59CB;&#x6E32;&#x67D3;&#x8C37;&#x6B4C;&#x5730;&#x56FE;</span>
+renderMap(baiduMap); <span class="hljs-comment">// &#x8F93;&#x51FA; &#x5F00;&#x59CB;&#x6E32;&#x67D3;&#x767E;&#x5EA6;&#x5730;&#x56FE;</span>
+
+<span class="hljs-keyword">const</span> gaodeMap = {
+  display: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;&#x5F00;&#x59CB;&#x6E32;&#x67D3;&#x9AD8;&#x5FB7;&#x5730;&#x56FE;&quot;</span>);
+  }
+};
+
+<span class="hljs-keyword">const</span> gaodeMapAdapter = {
+  show: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> gaodeMap.display();
+  }
+};
+renderMap(googleMap); <span class="hljs-comment">// &#x8F93;&#x51FA; &#x5F00;&#x59CB;&#x6E32;&#x67D3;&#x8C37;&#x6B4C;&#x5730;&#x56FE;</span>
+renderMap(baiduMap); <span class="hljs-comment">// &#x8F93;&#x51FA; &#x5F00;&#x59CB;&#x6E32;&#x67D3;&#x767E;&#x5EA6;&#x5730;&#x56FE;</span>
+renderMap(gaodeMapAdapter); <span class="hljs-comment">// &#x8F93;&#x51FA; &#x5F00;&#x59CB;&#x6E32;&#x67D3;&#x9AD8;&#x5FB7;&#x5730;&#x56FE;</span>
+</code></pre>
 
                                 
                                 </section>
@@ -681,7 +944,7 @@ target.fc(); <span class="hljs-comment">// &#x670D;&#x52A1;&#xFF1A;c</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"适配器模式 Adapter","level":"1.4.1","depth":2,"next":{"title":"桥接模式 Bridge","level":"1.4.2","depth":2,"path":"structural-design-patterns/bridge.md","ref":"structural-design-patterns/bridge.md","articles":[]},"previous":{"title":"结构型模式","level":"1.4","depth":1,"path":"structural-design-patterns/README.md","ref":"structural-design-patterns/README.md","articles":[{"title":"适配器模式 Adapter","level":"1.4.1","depth":2,"path":"structural-design-patterns/adapter.md","ref":"structural-design-patterns/adapter.md","articles":[]},{"title":"桥接模式 Bridge","level":"1.4.2","depth":2,"path":"structural-design-patterns/bridge.md","ref":"structural-design-patterns/bridge.md","articles":[]},{"title":"组合模式（部分整体模式）Composite","level":"1.4.3","depth":2,"path":"structural-design-patterns/composite.md","ref":"structural-design-patterns/composite.md","articles":[]},{"title":"装饰器模式 Decorator","level":"1.4.4","depth":2,"path":"structural-design-patterns/decorator.md","ref":"structural-design-patterns/decorator.md","articles":[]},{"title":"外观模式 Facade","level":"1.4.5","depth":2,"path":"structural-design-patterns/facade.md","ref":"structural-design-patterns/facade.md","articles":[]},{"title":"享元模式 Flyweight","level":"1.4.6","depth":2,"path":"structural-design-patterns/flyweight.md","ref":"structural-design-patterns/flyweight.md","articles":[]},{"title":"代理模式 Proxy","level":"1.4.7","depth":2,"path":"structural-design-patterns/proxy.md","ref":"structural-design-patterns/proxy.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"structural-design-patterns/adapter.md","mtime":"2021-08-31T06:02:44.718Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-31T06:03:15.495Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"适配器模式 Adapter","level":"1.4.1","depth":2,"next":{"title":"桥接模式 Bridge","level":"1.4.2","depth":2,"path":"structural-design-patterns/bridge.md","ref":"structural-design-patterns/bridge.md","articles":[]},"previous":{"title":"结构型模式","level":"1.4","depth":1,"path":"structural-design-patterns/README.md","ref":"structural-design-patterns/README.md","articles":[{"title":"适配器模式 Adapter","level":"1.4.1","depth":2,"path":"structural-design-patterns/adapter.md","ref":"structural-design-patterns/adapter.md","articles":[]},{"title":"桥接模式 Bridge","level":"1.4.2","depth":2,"path":"structural-design-patterns/bridge.md","ref":"structural-design-patterns/bridge.md","articles":[]},{"title":"组合模式（部分整体模式）Composite","level":"1.4.3","depth":2,"path":"structural-design-patterns/composite.md","ref":"structural-design-patterns/composite.md","articles":[]},{"title":"装饰器模式 Decorator","level":"1.4.4","depth":2,"path":"structural-design-patterns/decorator.md","ref":"structural-design-patterns/decorator.md","articles":[]},{"title":"外观模式 Facade","level":"1.4.5","depth":2,"path":"structural-design-patterns/facade.md","ref":"structural-design-patterns/facade.md","articles":[]},{"title":"享元模式 Flyweight","level":"1.4.6","depth":2,"path":"structural-design-patterns/flyweight.md","ref":"structural-design-patterns/flyweight.md","articles":[]},{"title":"代理模式 Proxy","level":"1.4.7","depth":2,"path":"structural-design-patterns/proxy.md","ref":"structural-design-patterns/proxy.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"structural-design-patterns/adapter.md","mtime":"2021-08-31T08:16:08.790Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-08-31T08:16:35.768Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
